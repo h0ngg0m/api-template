@@ -1,0 +1,43 @@
+### signIn
+POST http://localhost:8000/api/v1/admins/sign-in
+Content-Type: application/json
+
+{
+  "loginId": "admin",
+  "password": "d404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db"
+}
+
+### signUp
+POST http://localhost:8000/api/v1/admins
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpZCI6MSwibmFtZSI6ImFkbWluIiwibG9naW5JZCI6ImFkbWluIiwicm9sZSI6IlNVUEVSIiwiZXhwIjoxNzM1MjY1MjU3fQ.d7XNDNLT-TuEI1WVeKQoCNoZI1EdfVWaT2zj7e4VXxFRRFcUX0NeieNIcaAtdx53aCEX2U4AfZ-gGcMa8ybVPA
+
+{
+  "loginId": "admin223",
+  "password": "admin",
+  "name": "admin",
+  "role": "NORMAL"
+}
+
+### getAdmins
+GET http://localhost:8000/api/v1/admins?page=1&itemsPerPage=10&sortBy=id&sortDesc=false
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiU1VQRVIiLCJsb2dpbklkIjoiYWRtaW4iLCJuYW1lIjoiYWRtaW4iLCJpZCI6MSwiZXhwIjoxNzM1MTk5MzcxfQ.0aRJRZSA2ODHSlIlegwlVQtyTG8W4YgmrT3-bKL7U1UWq7vi_MHx1q7r9MnoE8n0Qf_e-icSU7DoJYcDHvy_8Q
+
+
+### update
+PUT http://localhost:8000/api/v1/admins/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiU1VQRVIiLCJsb2dpbklkIjoiYWRtaW4iLCJuYW1lIjoiYWRtaW4iLCJpZCI6MSwiZXhwIjoxNzM1MTgxMzE4fQ.VCG4IdhsZ042batcx332YggaHwWVyAUr5mrVUYBF6VosqBI1MfnAdXTRa8Ll3Cwn0E-6VUxWeX8ct4SKDUTeBw
+
+{
+  "name": "updateadmin",
+  "password": "adminaaaa",
+  "role": "SUPER"
+}
+
+### delete
+DELETE http://localhost:8000/api/v1/admins/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpZCI6MSwibmFtZSI6ImFkbWluIiwibG9naW5JZCI6ImFkbWluIiwicm9sZSI6IlNVUEVSIiwiZXhwIjoxNzM1MjY1MjU3fQ.d7XNDNLT-TuEI1WVeKQoCNoZI1EdfVWaT2zj7e4VXxFRRFcUX0NeieNIcaAtdx53aCEX2U4AfZ-gGcMa8ybVPA
+

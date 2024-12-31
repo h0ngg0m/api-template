@@ -1,0 +1,2 @@
+INSERT INTO admin (ID, NAME, LOGIN_ID, PASSWORD, ROLE, CREATED_AT, UPDATED_AT)
+VALUES (1, 'admin', 'admin', '$2a$10$7eVxlG3WEZqGksKO/u3NC.9VZyVbacL9GO73LVi1k06uqiX8qx4sy', 'SUPER', now(), now());
