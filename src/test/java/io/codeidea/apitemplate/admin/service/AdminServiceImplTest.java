@@ -85,7 +85,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void Admin들을_페이징하여_조회할_수_있다() {
+    void 관리자들을_페이징으로_조회할_수_있다() {
         // given
         PaginationRequest paginationRequest = new PaginationRequest(1, 2, "id", false);
 
@@ -100,7 +100,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void 로그인을_성공하면_jwt를_반환_받을_수_있다() {
+    void 관리자가_로그인에_성공하면_JWT를_반환받는다() {
         // given
         AdminSignIn adminSignIn = new AdminSignIn("admin", "1234");
 
@@ -112,7 +112,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void 로그인_성공_시_lastLoginAt이_갱신된다() {
+    void 관리자가_로그인에_성공하면_최종_로그인_일시가_갱신된다() {
         // given
         AdminSignIn adminSignIn = new AdminSignIn("admin", "1234");
 
@@ -125,7 +125,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void 존재하지_않는_loginId로_로그인을_시도하면_예외가_발생한다() {
+    void 관리자가_존재하지_않는_아이디로_로그인을_시도하면_예외가_발생한다() {
         // given
         AdminSignIn adminSignIn = new AdminSignIn("not_exists", "1234");
 
@@ -136,7 +136,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void 틀린_비밀번호로_로그인을_시도하면_예외가_발생한다() {
+    void 관리자가_틀린_비밀번호로_로그인을_시도하면_예외가_발생한다() {
         // given
         AdminSignIn adminSignIn = new AdminSignIn("admin", "wrong_password");
 
@@ -147,7 +147,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void 가입을_성공한다() {
+    void 관리자는_회원가입을_할_수_있다() {
         // given
         AdminSignUp adminSignUp =
                 new AdminSignUp("new_admin", "new_admin", "1234", AdminRole.SUPER);
@@ -166,7 +166,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void 이미_존재하는_loginId로_회원가입을_시도하면_예외가_발생한다() {
+    void 관리자가_이미_등록된_아이디로_회원가입을_시도히면_예외가_발생한다() {
         // given
         AdminSignUp adminSignUp = new AdminSignUp("new_admin", "admin", "1234", AdminRole.SUPER);
 
@@ -177,7 +177,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void 정보를_수정한다__새로운_비밀번호를_포함하면_비밀번호도_변경된다() {
+    void 관리자가_정보를_수정할_때_새로운_비밀번호를_입력하면_비밀번호를_포함하여_정보가_수정된다() {
         // given
         String oldPassword = sampleAdmin.getPassword();
         AdminUpdate adminUpdate =
@@ -200,7 +200,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void 정보를_수정한다__비밀번호를_포함하지_않으면_기존_비밀번호로_유지된다() {
+    void 관리자가_정보를_수정할_때_새로운_비밀번호를_입력하지_않으면_비밀번호를_제외하고_정보가_수정된다() {
         // given
         String oldPassword = sampleAdmin.getPassword();
         AdminUpdate adminUpdate = new AdminUpdate("update_name", null, AdminRole.NORMAL);
@@ -222,7 +222,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void 존재하지_않는_id로_정보_수정을_시도하면_예외가_발생한다() {
+    void 관리자의_정보를_수정할_때_존재하지_않는_PK로_조회하면_예외가_발생한다() {
         // given
         AdminUpdate adminUpdate =
                 new AdminUpdate("update_name", "update_password", AdminRole.NORMAL);
@@ -234,7 +234,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void Admin을_삭제할_수_있다() {
+    void 관리자를_PK로_삭제할_수_있다() {
         // when
         adminService.delete(sampleAdmin.getId());
 
@@ -244,7 +244,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void id로_조회할_수_있다() {
+    void 관리자를_PK로_조회할_수_있다() {
         // when
         AdminResponse admin = adminService.findById(sampleAdmin.getId());
 
@@ -259,7 +259,7 @@ class AdminServiceImplTest {
     }
 
     @Test
-    void loginId로_조회할_수_있다() {
+    void 관리자를_아이디로_조회할_수_있다() {
         // when
         AdminResponse admin = adminService.findByLoginId(sampleAdmin.getLoginId());
 

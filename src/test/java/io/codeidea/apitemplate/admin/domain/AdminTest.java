@@ -19,7 +19,7 @@ class AdminTest {
     }
 
     @Test
-    void AdminSignUp_으로_생성할_수_있다() {
+    void 관리자는_회원가입을_할_수_있다() {
         // given
         AdminSignUp adminSignUp = new AdminSignUp("foo", "bar", "baz", AdminRole.NORMAL);
 
@@ -41,7 +41,7 @@ class AdminTest {
     }
 
     @Test
-    void AdminUpdate로_수정할_수_있다() {
+    void 관리자의_정보를_수정할_수_있다() {
         // given
         LocalDateTime createdAt = LocalDateTime.now();
         Admin admin =
