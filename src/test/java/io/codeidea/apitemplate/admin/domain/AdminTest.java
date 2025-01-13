@@ -25,7 +25,15 @@ class AdminTest {
 
         // when
         Admin admin =
-                Admin.create(1L, "foo", "bar", passwordEncoder.encode("baz"), AdminRole.NORMAL, createdAt, createdAt, null);
+                Admin.create(
+                        1L,
+                        "foo",
+                        "bar",
+                        passwordEncoder.encode("baz"),
+                        AdminRole.NORMAL,
+                        createdAt,
+                        createdAt,
+                        null);
 
         // then
         assertThat(admin.getId()).isEqualTo(1L);
@@ -91,7 +99,15 @@ class AdminTest {
         // given
         LocalDateTime createdAt = LocalDateTime.now();
         Admin admin =
-                Admin.create(1L, "foo", "bar", passwordEncoder.encode("baz"), AdminRole.NORMAL, createdAt, createdAt, null);
+                Admin.create(
+                        1L,
+                        "foo",
+                        "bar",
+                        passwordEncoder.encode("baz"),
+                        AdminRole.NORMAL,
+                        createdAt,
+                        createdAt,
+                        null);
         LocalDateTime lastLoginAt = LocalDateTime.now();
 
         // when
