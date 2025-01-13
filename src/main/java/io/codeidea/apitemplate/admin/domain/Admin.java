@@ -1,9 +1,10 @@
 package io.codeidea.apitemplate.admin.domain;
 
-import java.time.LocalDateTime;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
+
+import java.time.LocalDateTime;
 
 @Getter
 @ToString
@@ -55,5 +56,13 @@ public class Admin {
             final LocalDateTime updatedAt,
             final LocalDateTime lastLoginAt) {
         return new Admin(id, name, loginId, password, role, createdAt, updatedAt, lastLoginAt);
+    }
+
+    public boolean signIn(String inputPassword, LocalDateTime lastLoginAt, PasswordEncoder passwordEncoder) {
+        if (!passwordEncoder.matches(inputPassword, this.getPassword())) {
+            return false;
+        }
+        this.setLastLoginAt(lastLoginAt);
+        return true;
     }
 }

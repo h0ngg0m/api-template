@@ -13,7 +13,9 @@ import io.codeidea.apitemplate.common.infrastructure.jwt.Jwt;
 import io.codeidea.apitemplate.common.infrastructure.jwt.JwtProvider;
 import io.codeidea.apitemplate.common.request.PaginationRequest;
 import io.codeidea.apitemplate.common.response.ApiResponseCode;
+
 import java.util.Map;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,13 +47,12 @@ public class AdminServiceImpl implements AdminService {
                         .findByLoginId(adminSignIn.loginId())
                         .orElseThrow(() -> new UnauthorizedException(ApiResponseCode.UNAUTHORIZED));
 
-        if (!passwordEncoder.matches(adminSignIn.password(), admin.getPassword())) {
-            throw new UnauthorizedException(ApiResponseCode.UNAUTHORIZED);
+        if (admin.signIn(adminSignIn.password(), timeHolder.getTime(), passwordEncoder)) {
+            adminRepository.save(admin);
+            return new Jwt(jwtProvider.generateAccessToken(generateClaims(admin)));
         }
 
-        admin.setLastLoginAt(timeHolder.getTime());
-        adminRepository.save(admin);
-        return new Jwt(jwtProvider.generateAccessToken(generateClaims(admin)));
+        throw new UnauthorizedException(ApiResponseCode.UNAUTHORIZED);
     }
 
     @Override
