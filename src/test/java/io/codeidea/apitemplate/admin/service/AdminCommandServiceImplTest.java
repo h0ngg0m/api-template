@@ -1,6 +1,7 @@
 package io.codeidea.apitemplate.admin.service;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import io.codeidea.apitemplate.admin.domain.*;
 import io.codeidea.apitemplate.admin.service.port.AdminRepository;
@@ -9,20 +10,18 @@ import io.codeidea.apitemplate.common.exception.custom.CustomException;
 import io.codeidea.apitemplate.common.exception.custom.UnauthorizedException;
 import io.codeidea.apitemplate.common.infrastructure.jwt.Jwt;
 import io.codeidea.apitemplate.common.infrastructure.jwt.SystemJwtProvider;
-import io.codeidea.apitemplate.common.request.PaginationRequest;
 import io.codeidea.apitemplate.mock.FakeAdminRepository;
 import io.codeidea.apitemplate.mock.TestJwtPropertiesHolder;
 import io.codeidea.apitemplate.mock.TestTimeHolder;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-class AdminServiceImplTest {
+class AdminCommandServiceImplTest {
 
-    private AdminService adminService;
+    private AdminCommandService adminCommandService;
     private Admin sampleAdmin;
     private AdminRepository adminRepository;
 
@@ -76,27 +75,12 @@ class AdminServiceImplTest {
                         LocalDateTime.now(),
                         null));
 
-        adminService =
-                new AdminServiceImpl(
+        adminCommandService =
+                new AdminCommandServiceImpl(
                         adminRepository,
                         new SystemJwtProvider(new TestJwtPropertiesHolder()),
                         passwordEncoder,
                         new TestTimeHolder(LocalDateTime.of(2021, 1, 1, 0, 0)));
-    }
-
-    @Test
-    void 관리자들을_페이징으로_조회할_수_있다() {
-        // given
-        PaginationRequest paginationRequest = new PaginationRequest(1, 2, "id", false);
-
-        // when
-        Page<AdminResponse> admins = adminService.findByPagination(paginationRequest);
-
-        // then
-        assertThat(admins.getTotalElements()).isEqualTo(4);
-        assertThat(admins.getTotalPages()).isEqualTo(2);
-        assertThat(admins.getContent().size()).isEqualTo(2);
-        assertThat(admins.hasNext()).isTrue();
     }
 
     @Test
@@ -105,7 +89,7 @@ class AdminServiceImplTest {
         AdminSignIn adminSignIn = new AdminSignIn("admin", "1234");
 
         // when
-        Jwt jwt = adminService.signIn(adminSignIn);
+        Jwt jwt = adminCommandService.signIn(adminSignIn);
 
         // then
         assertThat(jwt).isNotNull();
@@ -117,7 +101,7 @@ class AdminServiceImplTest {
         AdminSignIn adminSignIn = new AdminSignIn("admin", "1234");
 
         // when
-        adminService.signIn(adminSignIn);
+        adminCommandService.signIn(adminSignIn);
         Admin admin = adminRepository.findByLoginId("admin").get();
 
         // then
@@ -130,7 +114,7 @@ class AdminServiceImplTest {
         AdminSignIn adminSignIn = new AdminSignIn("not_exists", "1234");
 
         // when & then
-        assertThatThrownBy(() -> adminService.signIn(adminSignIn))
+        assertThatThrownBy(() -> adminCommandService.signIn(adminSignIn))
                 .isInstanceOf(UnauthorizedException.class)
                 .hasMessage("Unauthorized");
     }
@@ -141,7 +125,7 @@ class AdminServiceImplTest {
         AdminSignIn adminSignIn = new AdminSignIn("admin", "wrong_password");
 
         // when & then
-        assertThatThrownBy(() -> adminService.signIn(adminSignIn))
+        assertThatThrownBy(() -> adminCommandService.signIn(adminSignIn))
                 .isInstanceOf(UnauthorizedException.class)
                 .hasMessage("Unauthorized");
     }
@@ -153,7 +137,7 @@ class AdminServiceImplTest {
                 new AdminSignUp("new_admin", "new_admin", "1234", AdminRole.SUPER);
 
         // when
-        AdminResponse admin = adminService.signUp(adminSignUp);
+        AdminResponse admin = adminCommandService.signUp(adminSignUp);
 
         // then
         assertThat(admin.id()).isNotNull();
@@ -171,7 +155,7 @@ class AdminServiceImplTest {
         AdminSignUp adminSignUp = new AdminSignUp("new_admin", "admin", "1234", AdminRole.SUPER);
 
         // when & then
-        assertThatThrownBy(() -> adminService.signUp(adminSignUp))
+        assertThatThrownBy(() -> adminCommandService.signUp(adminSignUp))
                 .isInstanceOf(CustomException.class)
                 .hasMessage("The admin already exists. loginId: admin");
     }
@@ -184,7 +168,7 @@ class AdminServiceImplTest {
                 new AdminUpdate("update_name", "update_password", AdminRole.NORMAL);
 
         // when
-        adminService.update(sampleAdmin.getId(), adminUpdate);
+        adminCommandService.update(sampleAdmin.getId(), adminUpdate);
 
         // then
         Admin updatedAdmin = adminRepository.findById(sampleAdmin.getId()).get();
@@ -206,7 +190,7 @@ class AdminServiceImplTest {
         AdminUpdate adminUpdate = new AdminUpdate("update_name", null, AdminRole.NORMAL);
 
         // when
-        adminService.update(sampleAdmin.getId(), adminUpdate);
+        adminCommandService.update(sampleAdmin.getId(), adminUpdate);
 
         // then
         Admin updatedAdmin = adminRepository.findById(sampleAdmin.getId()).get();
@@ -228,48 +212,20 @@ class AdminServiceImplTest {
                 new AdminUpdate("update_name", "update_password", AdminRole.NORMAL);
 
         // when & then
-        assertThatThrownBy(() -> adminService.update(999L, adminUpdate))
+        assertThatThrownBy(() -> adminCommandService.update(999L, adminUpdate))
                 .isInstanceOf(CustomException.class)
                 .hasMessage("The admin cannot be found. id: 999");
     }
 
     @Test
     void 관리자를_PK로_삭제할_수_있다() {
+        // given
+        Long id = sampleAdmin.getId();
+
         // when
-        adminService.delete(sampleAdmin.getId());
+        adminCommandService.delete(id);
 
         // then
-        assertThatThrownBy(() -> adminService.findById(sampleAdmin.getId()))
-                .isInstanceOf(CustomException.class);
-    }
-
-    @Test
-    void 관리자를_PK로_조회할_수_있다() {
-        // when
-        AdminResponse admin = adminService.findById(sampleAdmin.getId());
-
-        // then
-        assertThat(admin.id()).isEqualTo(sampleAdmin.getId());
-        assertThat(admin.name()).isEqualTo(sampleAdmin.getName());
-        assertThat(admin.loginId()).isEqualTo(sampleAdmin.getLoginId());
-        assertThat(admin.role()).isEqualTo(sampleAdmin.getRole());
-        assertThat(admin.createdAt()).isEqualTo(sampleAdmin.getCreatedAt());
-        assertThat(admin.updatedAt()).isEqualTo(sampleAdmin.getUpdatedAt());
-        assertThat(admin.lastLoginAt()).isEqualTo(sampleAdmin.getLastLoginAt());
-    }
-
-    @Test
-    void 관리자를_아이디로_조회할_수_있다() {
-        // when
-        AdminResponse admin = adminService.findByLoginId(sampleAdmin.getLoginId());
-
-        // then
-        assertThat(admin.id()).isEqualTo(sampleAdmin.getId());
-        assertThat(admin.name()).isEqualTo(sampleAdmin.getName());
-        assertThat(admin.loginId()).isEqualTo(sampleAdmin.getLoginId());
-        assertThat(admin.role()).isEqualTo(sampleAdmin.getRole());
-        assertThat(admin.createdAt()).isEqualTo(sampleAdmin.getCreatedAt());
-        assertThat(admin.updatedAt()).isEqualTo(sampleAdmin.getUpdatedAt());
-        assertThat(admin.lastLoginAt()).isEqualTo(sampleAdmin.getLastLoginAt());
+        assertThat(adminRepository.findById(id)).isEmpty();
     }
 }

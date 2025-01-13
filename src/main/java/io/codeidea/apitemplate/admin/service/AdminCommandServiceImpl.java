@@ -11,20 +11,17 @@ import io.codeidea.apitemplate.common.exception.custom.UnauthorizedException;
 import io.codeidea.apitemplate.common.infrastructure.TimeHolder;
 import io.codeidea.apitemplate.common.infrastructure.jwt.Jwt;
 import io.codeidea.apitemplate.common.infrastructure.jwt.JwtProvider;
-import io.codeidea.apitemplate.common.request.PaginationRequest;
 import io.codeidea.apitemplate.common.response.ApiResponseCode;
-
 import java.util.Map;
-
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class AdminServiceImpl implements AdminService {
+@Transactional
+public class AdminCommandServiceImpl implements AdminCommandService {
 
     private final AdminRepository adminRepository;
     private final JwtProvider jwtProvider;
@@ -32,15 +29,6 @@ public class AdminServiceImpl implements AdminService {
     private final TimeHolder timeHolder;
 
     @Override
-    @Transactional(readOnly = true)
-    public Page<AdminResponse> findByPagination(PaginationRequest paginationRequest) {
-        return adminRepository
-                .findByPagination(paginationRequest.getPageRequest())
-                .map(AdminResponse::new);
-    }
-
-    @Override
-    @Transactional
     public Jwt signIn(AdminSignIn adminSignIn) {
         Admin admin =
                 adminRepository
@@ -56,7 +44,6 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Transactional
     public AdminResponse signUp(AdminSignUp adminSignUp) {
         if (adminRepository.existsByLoginId(adminSignUp.getLoginId())) {
             throw new CustomException(
@@ -69,7 +56,6 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Transactional
     public AdminResponse update(Long id, AdminUpdate adminUpdate) {
         Admin admin =
                 adminRepository
@@ -86,34 +72,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Transactional
     public void delete(Long id) {
         adminRepository.deleteById(id);
-    }
-
-    @Override
-    public AdminResponse findById(Long id) {
-        return new AdminResponse(
-                adminRepository
-                        .findById(id)
-                        .orElseThrow(
-                                () ->
-                                        new CustomException(
-                                                ApiResponseCode.ADMIN_NOT_FOUND.customMessage(
-                                                        "The admin cannot be found. id: " + id))));
-    }
-
-    @Override
-    public AdminResponse findByLoginId(String loginId) {
-        return new AdminResponse(
-                adminRepository
-                        .findByLoginId(loginId)
-                        .orElseThrow(
-                                () ->
-                                        new CustomException(
-                                                ApiResponseCode.ADMIN_NOT_FOUND.customMessage(
-                                                        "The admin cannot be found. loginId: "
-                                                                + loginId))));
     }
 
     private Map<String, Object> generateClaims(Admin admin) {
