@@ -9,7 +9,7 @@ import org.springframework.data.domain.Sort;
 @AllArgsConstructor
 public class PaginationRequest {
 
-    @NotNull private Integer page;
+    @NotNull private Integer pageIndex;
 
     @NotNull private Integer pageSize;
 
@@ -22,6 +22,6 @@ public class PaginationRequest {
     }
 
     public PageRequest getPageRequest() {
-        return PageRequest.of(this.page, this.pageSize, this.getSort());
+        return PageRequest.of(this.pageIndex, this.pageSize, this.getSort());
     }
 }

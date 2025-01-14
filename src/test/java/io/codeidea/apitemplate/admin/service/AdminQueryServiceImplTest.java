@@ -76,7 +76,7 @@ class AdminQueryServiceImplTest {
     @Test
     void 관리자들을_페이징으로_조회할_수_있다() {
         // given
-        PaginationRequest paginationRequest = new PaginationRequest(1, 2, "id", false);
+        PaginationRequest paginationRequest = new PaginationRequest(0, 2, "id", false);
 
         // when
         Page<AdminResponse> admins = adminQueryService.findByPagination(paginationRequest);
