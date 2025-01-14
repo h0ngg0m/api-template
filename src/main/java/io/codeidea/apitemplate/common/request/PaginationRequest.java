@@ -11,7 +11,7 @@ public class PaginationRequest {
 
     @NotNull private Integer page;
 
-    @NotNull private Integer itemsPerPage;
+    @NotNull private Integer pageSize;
 
     @NotBlank private String sortBy;
 
@@ -22,6 +22,6 @@ public class PaginationRequest {
     }
 
     public PageRequest getPageRequest() {
-        return PageRequest.of(this.page - 1, this.itemsPerPage, this.getSort());
+        return PageRequest.of(this.page, this.pageSize, this.getSort());
     }
 }
