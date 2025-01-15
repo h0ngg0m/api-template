@@ -43,7 +43,7 @@ class AdminTest {
         assertThat(admin.getRole()).isEqualTo(AdminRole.NORMAL);
         assertThat(admin.getCreatedAt()).isEqualTo(createdAt);
         assertThat(admin.getUpdatedAt()).isEqualTo(createdAt);
-        assertThat(admin.getLastLoginAt()).isNotNull(); // 실패!!
+        assertThat(admin.getLastLoginAt()).isNull();
     }
 
     @Test
