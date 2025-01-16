@@ -12,7 +12,7 @@ public interface AdminCommandService {
 
     AdminResponse signUp(AdminSignUp adminSignUp);
 
-    AdminResponse update(Long id, AdminUpdate adminUpdate);
+    void update(Long id, AdminUpdate adminUpdate);
 
     void delete(Long id);
 }

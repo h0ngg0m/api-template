@@ -14,6 +14,15 @@ public class ApiResponseFactory {
                                 ApiResponseCode.SUCCESS.getMessage()));
     }
 
+    public static ResponseEntity<ApiResponse<Void>> ok() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(
+                        ApiResponse.of(
+                                null,
+                                ApiResponseCode.SUCCESS.getCode(),
+                                ApiResponseCode.SUCCESS.getMessage()));
+    }
+
     public static <T> ResponseEntity<ApiResponse<T>> created(T data) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(
@@ -23,7 +32,7 @@ public class ApiResponseFactory {
                                 ApiResponseCode.SUCCESS.getMessage()));
     }
 
-    public static ResponseEntity<ApiResponse<?>> noContent() {
+    public static ResponseEntity<ApiResponse<Void>> noContent() {
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
                 .body(
                         ApiResponse.of(

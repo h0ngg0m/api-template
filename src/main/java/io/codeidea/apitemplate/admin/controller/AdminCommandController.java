@@ -35,14 +35,15 @@ public class AdminCommandController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('SUPER')")
-    public ResponseEntity<ApiResponse<AdminResponse>> updateAdmin(
+    public ResponseEntity<ApiResponse<Void>> updateAdmin(
             @PathVariable Long id, @Valid @RequestBody AdminUpdate adminUpdate) {
-        return ApiResponseFactory.ok(adminCommandService.update(id, adminUpdate));
+        adminCommandService.update(id, adminUpdate);
+        return ApiResponseFactory.ok();
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('SUPER')")
-    public ResponseEntity<ApiResponse<?>> deleteAdmin(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<Void>> deleteAdmin(@PathVariable Long id) {
         adminCommandService.delete(id);
         return ApiResponseFactory.noContent();
     }

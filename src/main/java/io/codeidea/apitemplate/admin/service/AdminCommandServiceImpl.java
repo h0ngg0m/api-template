@@ -56,7 +56,7 @@ public class AdminCommandServiceImpl implements AdminCommandService {
     }
 
     @Override
-    public AdminResponse update(Long id, AdminUpdate adminUpdate) {
+    public void update(Long id, AdminUpdate adminUpdate) {
         Admin admin =
                 adminRepository
                         .findById(id)
@@ -65,10 +65,7 @@ public class AdminCommandServiceImpl implements AdminCommandService {
                                         new CustomException(
                                                 ApiResponseCode.ADMIN_NOT_FOUND.customMessage(
                                                         "The admin cannot be found. id: " + id)));
-
-        return new AdminResponse(
-                adminRepository.save(
-                        admin.update(adminUpdate, timeHolder.getTime(), passwordEncoder)));
+        adminRepository.save(admin.update(adminUpdate, timeHolder.getTime(), passwordEncoder));
     }
 
     @Override
