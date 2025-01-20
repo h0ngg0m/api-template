@@ -12,7 +12,7 @@ import org.springframework.data.support.PageableExecutionUtils;
 public class AdminJpaRepositoryCustomImpl implements AdminJpaRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
-    private static final QAdminEntity adminEntity = QAdminEntity.adminEntity;
+    private static final QAdminEntity admin = QAdminEntity.adminEntity;
 
     @Override
     public Page<AdminEntity> findByPagination(Pageable pageable) {
@@ -21,9 +21,9 @@ public class AdminJpaRepositoryCustomImpl implements AdminJpaRepositoryCustom {
 
         List<AdminEntity> content =
                 queryFactory
-                        .selectFrom(adminEntity)
+                        .selectFrom(admin)
                         .where(builder)
-                        .orderBy(adminEntity.id.desc())
+                        .orderBy(admin.id.desc())
                         .offset(pageable.getOffset())
                         .limit(pageable.getPageSize())
                         .fetch();
@@ -31,11 +31,6 @@ public class AdminJpaRepositoryCustomImpl implements AdminJpaRepositoryCustom {
         return PageableExecutionUtils.getPage(
                 content,
                 pageable,
-                () ->
-                        queryFactory
-                                .select(adminEntity.id.count())
-                                .from(adminEntity)
-                                .where(builder)
-                                .fetchOne());
+                () -> queryFactory.select(admin.id.count()).from(admin).where(builder).fetchOne());
     }
 }
