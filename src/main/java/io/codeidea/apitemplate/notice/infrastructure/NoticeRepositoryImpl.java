@@ -26,5 +26,4 @@ public class NoticeRepositoryImpl implements NoticeRepository {
     public Page<Notice> findByPagination(Pageable pageable) {
         return noticeJpaRepository.findByPagination(pageable).map(NoticeEntity::toDomain);
     }
-
 }
