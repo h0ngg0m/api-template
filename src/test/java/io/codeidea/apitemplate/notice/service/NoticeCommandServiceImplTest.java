@@ -13,14 +13,14 @@ import org.junit.jupiter.api.Test;
 
 public class NoticeCommandServiceImplTest {
 
-    private NoticeCommandServiceImpl noticeCommandServiceImpl;
+    private NoticeCommandService noticeCommandService;
     private NoticeRepository noticeRepository;
     private LocalDateTime sampleDateTime = LocalDateTime.of(2021, 1, 1, 0, 0);
 
     @BeforeEach
     void setup() {
         noticeRepository = new FakeNoticeRepository();
-        noticeCommandServiceImpl =
+        noticeCommandService =
                 new NoticeCommandServiceImpl(noticeRepository, new TestTimeHolder(sampleDateTime));
     }
 
@@ -30,7 +30,7 @@ public class NoticeCommandServiceImplTest {
         NoticeCreate noticeCreate = new NoticeCreate("foo", "bar");
 
         // when
-        NoticeResponse notice = noticeCommandServiceImpl.create(noticeCreate);
+        NoticeResponse notice = noticeCommandService.create(noticeCreate);
 
         // then
         assertThat(notice.id()).isNotNull();
