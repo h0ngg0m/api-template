@@ -17,7 +17,7 @@ class NoticeTest {
         LocalDateTime updatedAt = LocalDateTime.now();
 
         // when
-        Notice notice = Notice.create(1L, title, content, createdAt, updatedAt);
+        Notice notice = Notice.of(id, title, content, createdAt, updatedAt);
 
         // then
         assertThat(notice.getId()).isEqualTo(1L);

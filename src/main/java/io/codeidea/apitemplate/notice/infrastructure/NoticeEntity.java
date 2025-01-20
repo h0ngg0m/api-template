@@ -34,6 +34,6 @@ public class NoticeEntity {
     }
 
     public Notice toDomain() {
-        return Notice.create(id, title, content, createdAt, updatedAt);
+        return Notice.of(id, title, content, createdAt, updatedAt);
     }
 }

@@ -15,12 +15,19 @@ public class Notice {
     private LocalDateTime createdAt;
     @Setter private LocalDateTime updatedAt;
 
-    public static Notice create(
+    public static Notice of(
             final Long id,
             final String title,
             final String content,
             final LocalDateTime createdAt,
             final LocalDateTime updatedAt) {
         return new Notice(id, title, content, createdAt, updatedAt);
+    }
+
+    public static Notice create(
+            final NoticeCreate noticeCreate,
+            final LocalDateTime createdAt,
+            final LocalDateTime updatedAt) {
+        return new Notice(null, noticeCreate.title(), noticeCreate.content(), createdAt, updatedAt);
     }
 }
