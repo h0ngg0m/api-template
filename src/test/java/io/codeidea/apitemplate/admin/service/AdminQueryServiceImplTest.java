@@ -27,7 +27,7 @@ class AdminQueryServiceImplTest {
 
         sampleAdmin =
                 adminRepository.save(
-                        Admin.create(
+                        Admin.of(
                                 null,
                                 "admin",
                                 "admin",
@@ -38,7 +38,7 @@ class AdminQueryServiceImplTest {
                                 null));
 
         adminRepository.save(
-                Admin.create(
+                Admin.of(
                         null,
                         "admin2",
                         "admin2",
@@ -49,7 +49,7 @@ class AdminQueryServiceImplTest {
                         null));
 
         adminRepository.save(
-                Admin.create(
+                Admin.of(
                         null,
                         "admin3",
                         "admin3",
@@ -60,7 +60,7 @@ class AdminQueryServiceImplTest {
                         null));
 
         adminRepository.save(
-                Admin.create(
+                Admin.of(
                         null,
                         "admin4",
                         "admin4",

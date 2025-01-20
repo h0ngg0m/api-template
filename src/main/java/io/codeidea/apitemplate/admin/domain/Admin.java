@@ -45,7 +45,7 @@ public class Admin {
         return this;
     }
 
-    public static Admin create(
+    public static Admin of(
             final Long id,
             final String name,
             final String loginId,

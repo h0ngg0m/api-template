@@ -32,7 +32,7 @@ class AdminCommandServiceImplTest {
 
         sampleAdmin =
                 adminRepository.save(
-                        Admin.create(
+                        Admin.of(
                                 null,
                                 "admin",
                                 "admin",
@@ -43,7 +43,7 @@ class AdminCommandServiceImplTest {
                                 null));
 
         adminRepository.save(
-                Admin.create(
+                Admin.of(
                         null,
                         "admin2",
                         "admin2",
@@ -54,7 +54,7 @@ class AdminCommandServiceImplTest {
                         null));
 
         adminRepository.save(
-                Admin.create(
+                Admin.of(
                         null,
                         "admin3",
                         "admin3",
@@ -65,7 +65,7 @@ class AdminCommandServiceImplTest {
                         null));
 
         adminRepository.save(
-                Admin.create(
+                Admin.of(
                         null,
                         "admin4",
                         "admin4",

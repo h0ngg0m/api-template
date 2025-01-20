@@ -30,7 +30,7 @@ public class AdminEntity {
     @Setter private LocalDateTime lastLoginAt;
 
     public Admin toDomain() {
-        return Admin.create(id, name, loginId, password, role, createdAt, updatedAt, lastLoginAt);
+        return Admin.of(id, name, loginId, password, role, createdAt, updatedAt, lastLoginAt);
     }
 
     public static AdminEntity from(Admin admin) {

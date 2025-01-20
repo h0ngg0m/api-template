@@ -25,7 +25,7 @@ class AdminTest {
 
         // when
         Admin admin =
-                Admin.create(
+                Admin.of(
                         1L,
                         "foo",
                         "bar",
@@ -73,7 +73,7 @@ class AdminTest {
         // given
         LocalDateTime createdAt = LocalDateTime.now();
         Admin admin =
-                Admin.create(1L, "foo", "bar", "baz", AdminRole.NORMAL, createdAt, createdAt, null);
+                Admin.of(1L, "foo", "bar", "baz", AdminRole.NORMAL, createdAt, createdAt, null);
         LocalDateTime updatedAt = LocalDateTime.now();
 
         // when
@@ -99,7 +99,7 @@ class AdminTest {
         // given
         LocalDateTime createdAt = LocalDateTime.now();
         Admin admin =
-                Admin.create(
+                Admin.of(
                         1L,
                         "foo",
                         "bar",

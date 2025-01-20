@@ -41,7 +41,7 @@ public class FakeAdminRepository implements AdminRepository {
     public Admin save(Admin admin) {
         if (admin.getId() == null) {
             Admin newAdmin =
-                    Admin.create(
+                    Admin.of(
                             id,
                             admin.getName(),
                             admin.getLoginId(),
