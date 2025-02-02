@@ -23,6 +23,6 @@ public class NoticeCommandController {
     @PostMapping
     public ResponseEntity<ApiResponse<NoticeResponse>> create(
             @Valid @RequestBody NoticeCreate noticeCreate) {
-        return ApiResponseFactory.ok(noticeCommandService.create(noticeCreate));
+        return ApiResponseFactory.created(noticeCommandService.create(noticeCreate));
     }
 }
