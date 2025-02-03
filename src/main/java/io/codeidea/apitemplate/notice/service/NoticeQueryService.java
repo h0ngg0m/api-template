@@ -7,4 +7,6 @@ import org.springframework.data.domain.Page;
 public interface NoticeQueryService {
 
     Page<NoticeResponse> findByPagination(PaginationRequest paginationRequest);
+
+    NoticeResponse findById(Long id);
 }

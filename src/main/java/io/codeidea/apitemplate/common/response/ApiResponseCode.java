@@ -20,7 +20,9 @@ public enum ApiResponseCode {
     // Admin error
     ADMIN_ALREADY_EXISTS("ADMIN-001", "Admin already exists"),
     ADMIN_NOT_FOUND("ADMIN-002", "Admin not found"),
-    ;
+
+    // Notice error
+    NOTICE_NOT_FOUND("NOTICE-001", "Notice not found");
 
     private final String code;
     private String message;

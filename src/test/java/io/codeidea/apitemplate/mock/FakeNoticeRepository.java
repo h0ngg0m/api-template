@@ -5,6 +5,7 @@ import io.codeidea.apitemplate.notice.service.port.NoticeRepository;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -54,6 +55,11 @@ public class FakeNoticeRepository implements NoticeRepository {
                     pageable,
                     notices.size());
         }
+    }
+
+    @Override
+    public Optional<Notice> findById(Long id) {
+        return notices.stream().filter(a -> a.getId().equals(id)).findFirst();
     }
 
     private static Stream<Notice> sortNotices(

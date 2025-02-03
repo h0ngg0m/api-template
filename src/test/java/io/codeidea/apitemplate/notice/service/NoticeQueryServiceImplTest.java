@@ -48,4 +48,18 @@ class NoticeQueryServiceImplTest {
         assertThat(notices.getContent().size()).isEqualTo(2);
         assertThat(notices.hasNext()).isTrue();
     }
+
+    @Test
+    void 공지사항을_PK로_조회할_수_있다() {
+        // given
+        Long id = 1L;
+
+        // when
+        NoticeResponse notice = noticeQueryService.findById(id);
+
+        // then
+        assertThat(notice.id()).isEqualTo(id);
+        assertThat(notice.title()).isEqualTo("title1");
+        assertThat(notice.content()).isEqualTo("content1");
+    }
 }

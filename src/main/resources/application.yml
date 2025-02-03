@@ -29,9 +29,9 @@ jwt:
 logging:
   level:
     org:
-      hibernate:
-        resource:
-          transaction: DEBUG
+#      hibernate:
+#        resource:
+#          transaction: DEBUG
       springframework:
         Security: TRACE
         orm:
