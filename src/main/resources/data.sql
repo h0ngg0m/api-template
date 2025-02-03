@@ -17,3 +17,16 @@ VALUES (1, '공지사항1', '공지사항1 내용', now(), now())
      , (6, '공지사항6', '공지사항6 내용', now(), now())
      , (7, '공지사항7', '공지사항7 내용', now(), now())
      , (8, '공지사항8', '공지사항8 내용', now(), now());
+
+INSERT INTO code_group (ID, TITLE, CREATED_AT, UPDATED_AT)
+VALUES (1, '코드그룹1', now(), now())
+     , (2, '코드그룹2', now(), now())
+     , (3, '코드그룹3', now(), now());
+
+INSERT INTO code (ID, TITLE, VALUE, CREATED_AT, UPDATED_AT, CODE_GROUP_ID)
+VALUES (1, '코드1-1', 'CODE1-1', now(), now(), 1)
+     , (2, '코드1-2', 'CODE1-2', now(), now(), 1)
+     , (3, '코드1-3', 'CODE1-3', now(), now(), 1)
+     , (4, '코드2-1', 'CODE2-1', now(), now(), 2)
+     , (5, '코드2-2', 'CODE2-2', now(), now(), 2)
+     , (6, '코드3-1', 'CODE3-1', now(), now(), 3);
