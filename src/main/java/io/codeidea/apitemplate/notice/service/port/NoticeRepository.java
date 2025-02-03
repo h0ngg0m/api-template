@@ -12,4 +12,6 @@ public interface NoticeRepository {
     Page<Notice> findByPagination(Pageable pageable);
 
     Optional<Notice> findById(Long id);
+
+    void deleteById(Long id);
 }

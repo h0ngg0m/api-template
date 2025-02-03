@@ -32,4 +32,9 @@ public class NoticeRepositoryImpl implements NoticeRepository {
     public Optional<Notice> findById(Long id) {
         return jpaRepository.findById(id).map(NoticeEntity::toDomain);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        jpaRepository.deleteById(id);
+    }
 }

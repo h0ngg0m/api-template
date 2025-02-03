@@ -23,4 +23,9 @@ public class NoticeCommandServiceImpl implements NoticeCommandService {
         LocalDateTime now = timeHolder.getTime();
         return new NoticeResponse(noticeRepository.save(Notice.create(noticeCreate, now, now)));
     }
+
+    @Override
+    public void delete(Long id) {
+        noticeRepository.deleteById(id);
+    }
 }

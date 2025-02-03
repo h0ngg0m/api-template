@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.codeidea.apitemplate.mock.FakeNoticeRepository;
 import io.codeidea.apitemplate.mock.TestTimeHolder;
+import io.codeidea.apitemplate.notice.domain.Notice;
 import io.codeidea.apitemplate.notice.domain.NoticeCreate;
 import io.codeidea.apitemplate.notice.service.port.NoticeRepository;
 import io.codeidea.apitemplate.notice.service.response.NoticeResponse;
@@ -20,6 +21,10 @@ public class NoticeCommandServiceImplTest {
     @BeforeEach
     void setup() {
         noticeRepository = new FakeNoticeRepository();
+
+        noticeRepository.save(
+                Notice.of(1L, "title1", "content1", LocalDateTime.now(), LocalDateTime.now()));
+
         noticeCommandService =
                 new NoticeCommandServiceImpl(noticeRepository, new TestTimeHolder(sampleDateTime));
     }
@@ -38,5 +43,17 @@ public class NoticeCommandServiceImplTest {
         assertThat(notice.content()).isEqualTo("bar");
         assertThat(notice.createdAt()).isEqualTo(sampleDateTime);
         assertThat(notice.updatedAt()).isEqualTo(sampleDateTime);
+    }
+
+    @Test
+    void 공지사항을_PK로_삭제할_수_있다() {
+        // given
+        Long id = 1L;
+
+        // when
+        noticeCommandService.delete(id);
+
+        // then
+        assertThat(noticeRepository.findById(id)).isEmpty();
     }
 }

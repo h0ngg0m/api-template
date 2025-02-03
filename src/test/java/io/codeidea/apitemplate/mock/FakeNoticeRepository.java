@@ -62,6 +62,11 @@ public class FakeNoticeRepository implements NoticeRepository {
         return notices.stream().filter(a -> a.getId().equals(id)).findFirst();
     }
 
+    @Override
+    public void deleteById(Long id) {
+        notices.removeIf(a -> a.getId().equals(id));
+    }
+
     private static Stream<Notice> sortNotices(
             String orderBy, boolean desc, Stream<Notice> targetNotices) {
         switch (orderBy) {
