@@ -1,8 +1,7 @@
-package io.codeidea.apitemplate.code.infrastructure;
+package io.codeidea.apitemplate.code.group.infrastructure;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import io.codeidea.apitemplate.code.group.infrastructure.QCodeGroupEntity;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,23 +9,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 
 @RequiredArgsConstructor
-public class CodeJpaRepositoryCustomImpl implements CodeJpaRepositoryCustom {
+public class CodeGroupJpaRepositoryCustomImpl implements CodeGroupJpaRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
-    private static final QCodeEntity code = QCodeEntity.codeEntity;
     private static final QCodeGroupEntity codeGroup = QCodeGroupEntity.codeGroupEntity;
 
     @Override
-    public Page<CodeEntity> findByPagination(Pageable pageable) {
+    public Page<CodeGroupEntity> findByPagination(Pageable pageable) {
         final BooleanBuilder builder = new BooleanBuilder();
 
-        List<CodeEntity> content =
+        List<CodeGroupEntity> content =
                 queryFactory
-                        .selectFrom(code)
-                        .leftJoin(code.codeGroup, codeGroup)
-                        .fetchJoin()
+                        .selectFrom(codeGroup)
                         .where(builder)
-                        .orderBy(code.id.desc())
+                        .orderBy(codeGroup.id.desc())
                         .offset(pageable.getOffset())
                         .limit(pageable.getPageSize())
                         .fetch();
@@ -36,9 +32,8 @@ public class CodeJpaRepositoryCustomImpl implements CodeJpaRepositoryCustom {
                 pageable,
                 () ->
                         queryFactory
-                                .select(code.count())
-                                .from(code)
-                                .leftJoin(code.codeGroup, codeGroup)
+                                .select(codeGroup.id.count())
+                                .from(codeGroup)
                                 .where(builder)
                                 .fetchOne());
     }

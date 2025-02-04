@@ -3,7 +3,7 @@ package io.codeidea.apitemplate.code.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.codeidea.apitemplate.code.domain.Code;
-import io.codeidea.apitemplate.code.domain.CodeGroup;
+import io.codeidea.apitemplate.code.group.domain.CodeGroup;
 import io.codeidea.apitemplate.code.service.port.CodeRepository;
 import io.codeidea.apitemplate.code.service.response.CodeResponse;
 import io.codeidea.apitemplate.common.request.PaginationRequest;
@@ -72,7 +72,7 @@ class CodeQueryServiceImplTest {
     @Test
     void 코드들을_페이징으로_조회할_수_있다_2() {
         // given
-        PaginationRequest paginationRequest = new PaginationRequest(0, 10, "id", false);
+        PaginationRequest paginationRequest = new PaginationRequest(0, -1, "id", false);
 
         // when
         Page<CodeResponse> codes = codeQueryService.findByPagination(paginationRequest);

@@ -1,6 +1,7 @@
 package io.codeidea.apitemplate.code.infrastructure;
 
 import io.codeidea.apitemplate.code.domain.Code;
+import io.codeidea.apitemplate.code.group.infrastructure.CodeGroupEntity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;

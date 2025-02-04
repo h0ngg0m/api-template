@@ -1,4 +1,4 @@
-package io.codeidea.apitemplate.code.domain;
+package io.codeidea.apitemplate.code.group.domain;
 
 import java.time.LocalDateTime;
 import lombok.*;

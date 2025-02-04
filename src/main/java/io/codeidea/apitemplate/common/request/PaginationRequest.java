@@ -22,6 +22,9 @@ public class PaginationRequest {
     }
 
     public PageRequest getPageRequest() {
-        return PageRequest.of(this.pageIndex, this.pageSize, this.getSort());
+        return PageRequest.of(
+                this.pageIndex,
+                this.pageSize == -1 ? Integer.MAX_VALUE : this.pageSize, // -1 to get all
+                this.getSort());
     }
 }

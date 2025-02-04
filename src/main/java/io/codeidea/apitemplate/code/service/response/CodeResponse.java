@@ -1,7 +1,7 @@
 package io.codeidea.apitemplate.code.service.response;
 
 import io.codeidea.apitemplate.code.domain.Code;
-import io.codeidea.apitemplate.code.domain.CodeGroup;
+import io.codeidea.apitemplate.code.group.domain.CodeGroup;
 import java.time.LocalDateTime;
 
 public record CodeResponse(
