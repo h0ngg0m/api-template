@@ -1,10 +1,10 @@
-package io.codeidea.apitemplate.code.group.service;
+package io.codeidea.apitemplate.codegroup.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.codeidea.apitemplate.code.group.domain.CodeGroup;
-import io.codeidea.apitemplate.code.group.service.port.CodeGroupRepository;
-import io.codeidea.apitemplate.code.group.service.response.CodeGroupResponse;
+import io.codeidea.apitemplate.codegroup.domain.CodeGroup;
+import io.codeidea.apitemplate.codegroup.service.port.CodeGroupRepository;
+import io.codeidea.apitemplate.codegroup.service.response.CodeGroupResponse;
 import io.codeidea.apitemplate.common.request.PaginationRequest;
 import io.codeidea.apitemplate.mock.FakeCodeGroupRepository;
 import java.time.LocalDateTime;

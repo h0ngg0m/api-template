@@ -1,6 +1,6 @@
-package io.codeidea.apitemplate.code.group.service.port;
+package io.codeidea.apitemplate.codegroup.service.port;
 
-import io.codeidea.apitemplate.code.group.domain.CodeGroup;
+import io.codeidea.apitemplate.codegroup.domain.CodeGroup;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

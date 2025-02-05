@@ -1,6 +1,6 @@
-package io.codeidea.apitemplate.code.group.service.response;
+package io.codeidea.apitemplate.codegroup.service.response;
 
-import io.codeidea.apitemplate.code.group.domain.CodeGroup;
+import io.codeidea.apitemplate.codegroup.domain.CodeGroup;
 import java.time.LocalDateTime;
 
 public record CodeGroupResponse(

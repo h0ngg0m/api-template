@@ -1,7 +1,7 @@
-package io.codeidea.apitemplate.code.group.controller;
+package io.codeidea.apitemplate.codegroup.controller;
 
-import io.codeidea.apitemplate.code.group.service.CodeGroupQueryService;
-import io.codeidea.apitemplate.code.group.service.response.CodeGroupResponse;
+import io.codeidea.apitemplate.codegroup.service.CodeGroupQueryService;
+import io.codeidea.apitemplate.codegroup.service.response.CodeGroupResponse;
 import io.codeidea.apitemplate.common.request.PaginationRequest;
 import io.codeidea.apitemplate.common.response.ApiResponse;
 import io.codeidea.apitemplate.common.response.ApiResponseFactory;

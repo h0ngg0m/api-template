@@ -1,7 +1,7 @@
 package io.codeidea.apitemplate.mock;
 
-import io.codeidea.apitemplate.code.group.domain.CodeGroup;
-import io.codeidea.apitemplate.code.group.service.port.CodeGroupRepository;
+import io.codeidea.apitemplate.codegroup.domain.CodeGroup;
+import io.codeidea.apitemplate.codegroup.service.port.CodeGroupRepository;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

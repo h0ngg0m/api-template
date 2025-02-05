@@ -1,7 +1,7 @@
-package io.codeidea.apitemplate.code.group.infrastructure;
+package io.codeidea.apitemplate.codegroup.infrastructure;
 
-import io.codeidea.apitemplate.code.group.domain.CodeGroup;
-import io.codeidea.apitemplate.code.group.service.port.CodeGroupRepository;
+import io.codeidea.apitemplate.codegroup.domain.CodeGroup;
+import io.codeidea.apitemplate.codegroup.service.port.CodeGroupRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;

@@ -1,4 +1,4 @@
-package io.codeidea.apitemplate.code.group.infrastructure;
+package io.codeidea.apitemplate.codegroup.infrastructure;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;

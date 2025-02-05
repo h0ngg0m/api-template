@@ -2,7 +2,7 @@ package io.codeidea.apitemplate.code.infrastructure;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import io.codeidea.apitemplate.code.group.infrastructure.QCodeGroupEntity;
+import io.codeidea.apitemplate.codegroup.infrastructure.QCodeGroupEntity;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

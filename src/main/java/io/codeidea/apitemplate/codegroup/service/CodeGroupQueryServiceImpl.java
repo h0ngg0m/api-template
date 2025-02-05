@@ -1,7 +1,7 @@
-package io.codeidea.apitemplate.code.group.service;
+package io.codeidea.apitemplate.codegroup.service;
 
-import io.codeidea.apitemplate.code.group.service.port.CodeGroupRepository;
-import io.codeidea.apitemplate.code.group.service.response.CodeGroupResponse;
+import io.codeidea.apitemplate.codegroup.service.port.CodeGroupRepository;
+import io.codeidea.apitemplate.codegroup.service.response.CodeGroupResponse;
 import io.codeidea.apitemplate.common.request.PaginationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

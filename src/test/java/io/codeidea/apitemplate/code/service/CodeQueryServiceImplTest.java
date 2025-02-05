@@ -3,9 +3,9 @@ package io.codeidea.apitemplate.code.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.codeidea.apitemplate.code.domain.Code;
-import io.codeidea.apitemplate.code.group.domain.CodeGroup;
 import io.codeidea.apitemplate.code.service.port.CodeRepository;
 import io.codeidea.apitemplate.code.service.response.CodeResponse;
+import io.codeidea.apitemplate.codegroup.domain.CodeGroup;
 import io.codeidea.apitemplate.common.request.PaginationRequest;
 import io.codeidea.apitemplate.mock.FakeCodeRepository;
 import java.time.LocalDateTime;

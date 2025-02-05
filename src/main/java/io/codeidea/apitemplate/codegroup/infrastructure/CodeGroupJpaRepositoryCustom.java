@@ -1,4 +1,4 @@
-package io.codeidea.apitemplate.code.group.infrastructure;
+package io.codeidea.apitemplate.codegroup.infrastructure;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
