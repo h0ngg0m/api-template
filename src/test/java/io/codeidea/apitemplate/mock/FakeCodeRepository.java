@@ -5,6 +5,7 @@ import io.codeidea.apitemplate.code.service.port.CodeRepository;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -15,6 +16,11 @@ public class FakeCodeRepository implements CodeRepository {
 
     private Long id = 1L;
     private final List<Code> codes = new ArrayList<>();
+
+    @Override
+    public Optional<Code> findById(Long id) {
+        return codes.stream().filter(a -> a.getId().equals(id)).findFirst();
+    }
 
     @Override
     public Code save(Code code) {

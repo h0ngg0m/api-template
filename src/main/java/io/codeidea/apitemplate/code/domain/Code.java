@@ -27,4 +27,12 @@ public class Code {
             final CodeGroup group) {
         return new Code(id, title, value, createdAt, updatedAt, group);
     }
+
+    public Code update(CodeUpdate codeUpdate, CodeGroup codeGroup, LocalDateTime updatedAt) {
+        this.title = codeUpdate.title();
+        this.value = codeUpdate.value();
+        this.codeGroup = codeGroup;
+        setUpdatedAt(updatedAt);
+        return this;
+    }
 }

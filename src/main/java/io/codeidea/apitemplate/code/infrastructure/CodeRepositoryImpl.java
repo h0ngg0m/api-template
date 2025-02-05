@@ -2,6 +2,7 @@ package io.codeidea.apitemplate.code.infrastructure;
 
 import io.codeidea.apitemplate.code.domain.Code;
 import io.codeidea.apitemplate.code.service.port.CodeRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,5 +26,10 @@ public class CodeRepositoryImpl implements CodeRepository {
         CodeEntity entity = CodeEntity.from(code);
         jpaRepository.save(entity);
         return entity.toDomain();
+    }
+
+    @Override
+    public Optional<Code> findById(Long id) {
+        return jpaRepository.findById(id).map(CodeEntity::toDomain);
     }
 }

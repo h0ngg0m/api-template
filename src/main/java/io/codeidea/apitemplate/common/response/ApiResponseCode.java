@@ -22,7 +22,13 @@ public enum ApiResponseCode {
     ADMIN_NOT_FOUND("ADMIN-002", "Admin not found"),
 
     // Notice error
-    NOTICE_NOT_FOUND("NOTICE-001", "Notice not found");
+    NOTICE_NOT_FOUND("NOTICE-001", "Notice not found"),
+
+    // Code error
+    CODE_NOT_FOUND("CODE-001", "Code not found"),
+
+    // CodeGroup error
+    CODE_GROUP_NOT_FOUND("CODE_GROUP-001", "Code group not found");
 
     private final String code;
     private String message;

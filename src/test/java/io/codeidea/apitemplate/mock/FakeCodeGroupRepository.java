@@ -5,6 +5,7 @@ import io.codeidea.apitemplate.codegroup.service.port.CodeGroupRepository;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -34,6 +35,11 @@ public class FakeCodeGroupRepository implements CodeGroupRepository {
             codeGroups.add(codeGroup);
             return codeGroup;
         }
+    }
+
+    @Override
+    public Optional<CodeGroup> findById(Long id) {
+        return codeGroups.stream().filter(a -> a.getId().equals(id)).findFirst();
     }
 
     @Override
