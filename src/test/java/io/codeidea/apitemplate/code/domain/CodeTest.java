@@ -1,11 +1,10 @@
 package io.codeidea.apitemplate.code.domain;
 
-import io.codeidea.apitemplate.codegroup.domain.CodeGroup;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import io.codeidea.apitemplate.codegroup.domain.CodeGroup;
+import java.time.LocalDateTime;
+import org.junit.jupiter.api.Test;
 
 class CodeTest {
     @Test

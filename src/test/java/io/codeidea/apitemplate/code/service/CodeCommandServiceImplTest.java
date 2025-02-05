@@ -1,5 +1,7 @@
 package io.codeidea.apitemplate.code.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.codeidea.apitemplate.code.domain.Code;
 import io.codeidea.apitemplate.code.domain.CodeUpdate;
 import io.codeidea.apitemplate.code.service.port.CodeRepository;
@@ -9,13 +11,9 @@ import io.codeidea.apitemplate.codegroup.service.port.CodeGroupRepository;
 import io.codeidea.apitemplate.mock.FakeCodeGroupRepository;
 import io.codeidea.apitemplate.mock.FakeCodeRepository;
 import io.codeidea.apitemplate.mock.TestTimeHolder;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 
 class CodeCommandServiceImplTest {
 
@@ -30,16 +28,21 @@ class CodeCommandServiceImplTest {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-
     @BeforeEach
     void setUp() {
         codeRepository = new FakeCodeRepository();
         codeGroupRepository = new FakeCodeGroupRepository();
-        codeCommandService = new CodeCommandServiceImpl(codeRepository, codeGroupRepository, new TestTimeHolder(updatedAt));
+        codeCommandService =
+                new CodeCommandServiceImpl(
+                        codeRepository, codeGroupRepository, new TestTimeHolder(updatedAt));
 
-        sampleCodeGroup1 = codeGroupRepository.save(CodeGroup.of(1L, "group1", createdAt, createdAt));
-        sampleCodeGroup2 = codeGroupRepository.save(CodeGroup.of(2L, "group2", createdAt, createdAt));
-        sampleCode = codeRepository.save(Code.of(1L, "code1", "code1", createdAt, createdAt, sampleCodeGroup1));
+        sampleCodeGroup1 =
+                codeGroupRepository.save(CodeGroup.of(1L, "group1", createdAt, createdAt));
+        sampleCodeGroup2 =
+                codeGroupRepository.save(CodeGroup.of(2L, "group2", createdAt, createdAt));
+        sampleCode =
+                codeRepository.save(
+                        Code.of(1L, "code1", "code1", createdAt, createdAt, sampleCodeGroup1));
     }
 
     @Test
